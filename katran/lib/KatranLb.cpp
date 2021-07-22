@@ -706,8 +706,10 @@ void KatranLb::attachBpfProgs() {
         main_fd, interface_index, config_.xdpAttachFlags);
     if (res != 0) {
       throw std::invalid_argument(folly::sformat(
-          "can't attach main bpf prog "
-          "to main inteface, error: {}",
+          "can't attach main bpf prog: {} "
+          "to main inteface: {}, error: {}",
+          main_fd,
+          interface_index,
           folly::errnoStr(errno)));
     }
   } else if (!config_.disableForwarding) {
